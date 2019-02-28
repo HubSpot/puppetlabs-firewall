@@ -579,6 +579,11 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
       end
     end
 
+    if hash[:random] == 'true-fully'
+      hash[:random_fully] = 'true'
+      hash.delete :random
+    end
+
     # Convert booleans removing the previous cludge we did
     @known_booleans.each do |bool|
       unless [nil, 'true', '!'].include?(hash[bool])
