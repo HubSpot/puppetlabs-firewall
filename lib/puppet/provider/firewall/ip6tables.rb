@@ -105,6 +105,7 @@ Puppet::Type.type(:firewall).provide :ip6tables, parent: :iptables, source: :ip6
     proto: '-p',
     queue_num: '--queue-num',
     queue_bypass: '--queue-bypass',
+    random_fully: '--random-fully',
     rdest: '--rdest',
     reap: '--reap',
     recent: '-m recent',

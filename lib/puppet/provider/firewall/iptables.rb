@@ -102,6 +102,7 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
     queue_num: '--queue-num',
     queue_bypass: '--queue-bypass',
     random: '--random',
+    random_fully: '--random-fully',
     rdest: '--rdest',
     reap: '--reap',
     recent: '-m recent',
