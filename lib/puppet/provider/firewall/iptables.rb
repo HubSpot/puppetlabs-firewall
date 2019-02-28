@@ -508,6 +508,12 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
       end
     end
 
+    # The parser picks up --random-fully as both --random and --random-fully,
+    # so if both are set, remove :random from keys.
+    if keys.include? :random_fully and keys.include? :random
+      keys.delete :random
+    end
+
     # Manually remove chain
     if values =~ %r{(\s|^)-A\s}
       values = values.sub(%r{(\s|^)-A\s}, '\1')
