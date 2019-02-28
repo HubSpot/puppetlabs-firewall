@@ -40,6 +40,7 @@ Puppet::Type.newtype(:firewall) do
   feature :owner, 'Matching owners'
   feature :state_match, 'Matching stateful firewall states'
   feature :reject_type, 'The ability to control reject messages'
+  feature :random_fully, 'Fully randomize source port on SNAT and MASQUERADE rules with a PRNG'
   feature :log_level, 'The ability to control the log level'
   feature :log_prefix, 'The ability to add prefixes to log messages'
   feature :log_uid, 'Add UIDs to log messages'
@@ -619,7 +620,18 @@ Puppet::Type.newtype(:firewall) do
   newproperty(:random, required_features: :dnat) do
     desc <<-PUPPETCODE
       When using a jump value of "MASQUERADE", "DNAT", "REDIRECT", or "SNAT"
-      this boolean will enable randomized port mapping.
+      this boolean will enable randomized port mapping through a hash-based
+      algorithm
+    PUPPETCODE
+
+    newvalues(:true, :false)
+  end
+
+  newproperty(:random_fully, required_features: :random_fully) do
+    desc <<-PUPPETCODE
+      When using a jump value of "MASQUERADE" or "SNAT"
+      this boolean will enable fully randomized port mapping through a PRNG
+      requires iptables >= 1.6.2 and linux >= 3.14
     PUPPETCODE
 
     newvalues(:true, :false)

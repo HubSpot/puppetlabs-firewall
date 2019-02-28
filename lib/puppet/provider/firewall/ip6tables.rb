@@ -12,6 +12,7 @@ Puppet::Type.type(:firewall).provide :ip6tables, parent: :iptables, source: :ip6
   has_feature :icmp_match
   has_feature :owner
   has_feature :state_match
+  has_feature :random_fully
   has_feature :reject_type
   has_feature :log_level
   has_feature :log_prefix

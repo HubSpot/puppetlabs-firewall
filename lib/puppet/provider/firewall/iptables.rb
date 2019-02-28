@@ -17,6 +17,7 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
   has_feature :icmp_match
   has_feature :owner
   has_feature :state_match
+  has_feature :random_fully
   has_feature :reject_type
   has_feature :log_level
   has_feature :log_prefix
@@ -178,6 +179,7 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
     :isfragment,
     :log_uid,
     :random,
+    :random_fully,
     :rdest,
     :reap,
     :rsource,
@@ -296,7 +298,7 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
     :string_from, :string_to, :jump, :goto, :clusterip_new, :clusterip_hashmode,
     :clusterip_clustermac, :clusterip_total_nodes, :clusterip_local_node, :clusterip_hash_init, :queue_num, :queue_bypass,
     :nflog_group, :nflog_prefix, :nflog_range, :nflog_threshold, :clamp_mss_to_pmtu, :gateway,
-    :set_mss, :set_dscp, :set_dscp_class, :todest, :tosource, :toports, :to, :checksum_fill, :random, :log_prefix,
+    :set_mss, :set_dscp, :set_dscp_class, :todest, :tosource, :toports, :to, :checksum_fill, :random, :random_fully, :log_prefix,
     :log_level, :log_uid, :reject, :set_mark, :match_mark, :mss, :connlimit_above, :connlimit_mask, :connmark, :time_start, :time_stop,
     :month_days, :week_days, :date_start, :date_stop, :time_contiguous, :kernel_timezone,
     :src_cc, :dst_cc, :hashlimit_upto, :hashlimit_above, :hashlimit_name, :hashlimit_burst,
