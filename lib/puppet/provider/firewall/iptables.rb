@@ -485,7 +485,6 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
       [map_v].flatten.each do |v|
         ind = values.index(%r{\s#{v}\s})
         next unless ind
-        next if map_k == :random and !map_index[:random_fully].nil?
         map_index[map_k] = ind
       end
     end
@@ -506,12 +505,6 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
           break
         end
       end
-    end
-
-    # The parser picks up --random-fully as both --random and --random-fully,
-    # so if both are set, remove :random from keys.
-    if keys.include? :random_fully and keys.include? :random
-      keys.delete :random
     end
 
     # Manually remove chain
