@@ -485,6 +485,7 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
       [map_v].flatten.each do |v|
         ind = values.index(%r{\s#{v}\s})
         next unless ind
+        next if map_k == :random and !map_index[:random_fully].nil?
         map_index[map_k] = ind
       end
     end
