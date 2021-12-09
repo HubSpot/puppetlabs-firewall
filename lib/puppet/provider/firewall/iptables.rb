@@ -375,6 +375,11 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
   end
 
   def self.rule_to_hash(line, table, counter)
+    if line =~ /^-A KUBE-(SERVICES|SVC|SEP)/
+      warning "Skipping kube-proxy iptables rule: #{line}"
+      return
+    end
+
     hash = {}
     keys = []
     values = line.dup
