@@ -376,7 +376,7 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
 
   def self.rule_to_hash(line, table, counter)
     if line =~ /^-A KUBE-(SERVICES|SVC|SEP)/
-      warning "Skipping kube-proxy iptables rule: #{line}"
+      debug "Skipping kube-proxy iptables rule: #{line}"
       return
     end
 
