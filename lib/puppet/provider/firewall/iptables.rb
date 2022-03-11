@@ -472,6 +472,9 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
     if line =~ /^-A KUBE-/
       debug "Skipping kube-proxy iptables rule: #{line}"
       return
+    elsif line =~ /-j TPROXY/
+      debug "Skipping TPROXY iptables rule: #{line}"
+      return
     end
 
     hash = {}
