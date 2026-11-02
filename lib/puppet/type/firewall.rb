@@ -2265,6 +2265,14 @@ Puppet::Type.newtype(:firewall) do
     PUPPETCODE
   end
 
+  newproperty(:u32, required_features: :iptables) do
+    desc <<-PUPPETCODE
+      Match using the u32 extension. Use the canonical form iptables-save
+      prints (e.g. '0x0>>0x18&0xf=0x6:0xf'), otherwise the rule never matches
+      and is rewritten on every run.
+    PUPPETCODE
+  end
+
   newproperty(:ipvs, required_features: :ipvs) do
     desc <<-PUPPETCODE
       Indicates that the current packet belongs to an IPVS connection.

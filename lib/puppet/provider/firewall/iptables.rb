@@ -348,7 +348,7 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
     :table, :source, :destination, :iniface, :outiface,
     :physdev_in, :physdev_out, :physdev_is_bridged, :physdev_is_in, :physdev_is_out,
     :proto, :isfragment, :stat_mode, :stat_every, :stat_packet, :stat_probability,
-    :src_range, :dst_range, :tcp_flags, :uid, :gid, :mac_source, :sport, :dport, :port,
+    :src_range, :dst_range, :tcp_flags, :u32, :uid, :gid, :mac_source, :sport, :dport, :port,
     :src_type, :dst_type, :socket, :pkttype, :ipsec_dir, :ipsec_policy,
     :state, :ctstate, :ctproto, :ctorigsrc, :ctorigdst, :ctreplsrc, :ctrepldst,
     :ctorigsrcport, :ctorigdstport, :ctreplsrcport, :ctrepldstport, :ctstatus, :ctexpire, :ctdir,

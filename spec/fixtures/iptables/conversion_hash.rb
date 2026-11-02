@@ -217,6 +217,17 @@ ARGS_TO_HASH = {
       tcp_flags: 'SYN,RST,ACK,FIN SYN',
     },
   },
+  'u32_1' => {
+    line: '-A PREROUTING -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m u32 --u32 "0x0>>0x18&0xf=0x6:0xf" -m comment --comment "000 u32" -j DROP',
+    table: 'raw',
+    params: {
+      chain: 'PREROUTING',
+      proto: 'tcp',
+      tcp_flags: 'FIN,SYN,RST,ACK SYN',
+      u32: '0x0>>0x18&0xf=0x6:0xf',
+      action: 'drop',
+    },
+  },
   'state_returns_sorted_values' => {
     line: '-A INPUT -m state --state INVALID,RELATED,ESTABLISHED',
     table: 'filter',
@@ -1002,6 +1013,18 @@ HASH_TO_ARGS = {
     },
 
     args: ['-t', :filter, '-p', :tcp, '-m', 'tcp', '--tcp-flags', 'SYN,RST,ACK,FIN', 'SYN', '-m', 'comment', '--comment', '000 initiation'],
+  },
+  'u32_1' => {
+    params: {
+      name: '000 u32',
+      table: 'raw',
+      chain: 'PREROUTING',
+      proto: 'tcp',
+      tcp_flags: 'FIN,SYN,RST,ACK SYN',
+      u32: '0x0>>0x18&0xf=0x6:0xf',
+      action: 'drop',
+    },
+    args: ['-t', :raw, '-p', :tcp, '-m', 'tcp', '--tcp-flags', 'FIN,SYN,RST,ACK', 'SYN', '-m', 'u32', '--u32', '0x0>>0x18&0xf=0x6:0xf', '-j', 'DROP', '-m', 'comment', '--comment', '000 u32'],
   },
   'states_set_from_array' => {
     params: {
